@@ -1,0 +1,11 @@
+type Elastic {
+  cases: [Material]
+  editions: [Material]
+  plates: [Material]
+  weights: [Material]
+}
+
+type Material {
+  name: String
+  price: String
+}

@@ -1,0 +1,19 @@
+input InputCreateKeyboard {
+  extra_pcbs: Boolean
+  extra_plates: Boolean
+  about: String
+  alias: String
+  angle: String
+  brand: String
+  connection: String
+  firmware: String
+  mount: String
+  name: String
+  pcb: String
+  size: String
+  switch_support: String
+  images: [String]
+
+  # This is a json object you can see on type Keyboard, just parse it
+  elastics: String
+}

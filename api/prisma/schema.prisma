@@ -1,0 +1,67 @@
+generator client {
+	provider      = "prisma-client-js"
+  binaryTargets = ["darwin"]
+}
+
+datasource db {
+  provider = "postgres"
+  url      = env("DEV_URL")
+}
+
+model Auth {
+  id          String @default(cuid()) @id
+  email       String @unique
+  magic_word  String @unique
+  username    String?
+}
+
+model User {
+  id            String     @default(cuid()) @id
+  createdAt     String?
+  email         String     @unique
+  role          Role       @default(BASIC)
+  token_version Int?
+  username      String     @unique
+
+  follow_ids    String[]
+
+  projects_keyboards    Keyboard[]
+}
+
+enum Role {
+  BASIC
+  BANNED
+  CONTENT
+  CREATOR
+  ADMIN
+}
+
+model Article {
+  id            String     @default(cuid()) @id
+  createdAt     String?
+  body          String?
+}
+
+ model Keyboard {
+   id              String   @default(cuid()) @id
+   extra_pcbs      Boolean  @default(false)
+   extra_plates    Boolean  @default(false)
+   about           String?
+   alias           String   @unique
+   angle           String?
+   brand           String?
+   connection      String?
+   firmware        String?
+   mount           String?
+   name            String
+   pcb             String?
+   size            String?
+   switch_support  String?
+   images          String[]
+
+   elastics     Json?
+
+   User          User?    @relation(fields: [user_id], references: [id])
+   user_id       String?
+ }
+
